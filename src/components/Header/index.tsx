@@ -1,14 +1,16 @@
-import Styles from "./styles.module.scss";
+import { SignInButton } from "../SignInButton";
+import styles from "./styles.module.scss";
 
 export function Header() {
   return (
-    <header className={Styles.headerContainer}>
-      <div className={Styles.headerContent}>
+    <header className={styles.headerContainer}>
+      <div className={styles.headerContent}>
         <img src="/images/ignews.svg" alt="" />
         <nav>
-          <a className={Styles.active}>Home</a>
+          <a className={styles.active}>Home</a>
           <a>Posts</a>
         </nav>
+        <SignInButton />
       </div>
     </header>
   );
