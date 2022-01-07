@@ -1,4 +1,4 @@
-import { GetServerSideProps } from "next";
+import { GetStaticProps } from "next";
 import Head from "next/head";
 
 import { Header } from "../components/Header";
@@ -8,8 +8,10 @@ import { stripe } from "../services/stripe";
 import styles from "../styles/home.module.scss";
 
 interface IProduct {
-  priceId: string;
-  amount: number;
+  product: {
+    priceId: string;
+    amount: number;
+  };
 }
 
 export default function Home(props: IProduct) {
@@ -29,17 +31,17 @@ export default function Home(props: IProduct) {
           </h1>
           <p>
             Get access to all the publications <br />
-            <span>for $9.90 month</span>
+            <span>for {props.product.amount} month</span>
           </p>
-          <SubscribeButton priceId={props.priceId} />
+          <SubscribeButton priceId={props.product.priceId} />
         </section>
-        <img src="/images/mulher.svg" />
+        <img src="/images/mulher.svg" alt="coding girl" />
       </main>
     </>
   );
 }
 
-export const getServerSideProps: GetServerSideProps = async () => {
+export const getStaticProps: GetStaticProps = async () => {
   const price = await stripe.prices.retrieve("price_1KEH3HIridEt4KT9sVDNOFl0");
 
   const product = {
@@ -54,5 +56,6 @@ export const getServerSideProps: GetServerSideProps = async () => {
     props: {
       product,
     },
+    revalidate: 60 * 60 * 24, //24 hours
   };
 };
