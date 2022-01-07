@@ -15,7 +15,6 @@ interface IProduct {
 }
 
 export default function Home(props: IProduct) {
-  console.log(props);
   return (
     <>
       <Head>
