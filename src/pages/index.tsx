@@ -14,7 +14,7 @@ interface IProduct {
   };
 }
 
-export default function Home(props: IProduct) {
+export default function Home({ product }: IProduct) {
   return (
     <>
       <Head>
@@ -30,9 +30,9 @@ export default function Home(props: IProduct) {
           </h1>
           <p>
             Get access to all the publications <br />
-            <span>for {props.product.amount} month</span>
+            <span>for {product.amount} month</span>
           </p>
-          <SubscribeButton priceId={props.product.priceId} />
+          <SubscribeButton priceId={product.priceId} />
         </section>
         <img src="/images/mulher.svg" alt="coding girl" />
       </main>
@@ -41,7 +41,9 @@ export default function Home(props: IProduct) {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const price = await stripe.prices.retrieve("price_1KEH3HIridEt4KT9sVDNOFl0");
+  const price = await stripe.prices.retrieve("price_1KEH3HIridEt4KT9sVDNOFl0", {
+    expand: ["product"],
+  });
 
   const product = {
     priceId: price.id,
