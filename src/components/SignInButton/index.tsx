@@ -1,4 +1,4 @@
-import { useSession } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 import { FaGithub } from "react-icons/fa";
 import { FiX } from "react-icons/fi";
 
@@ -13,7 +13,7 @@ export function SignInButton() {
       <FiX className={Style.closeIcon} color="#737380" />
     </button>
   ) : (
-    <button className={Style.SignInButton}>
+    <button onClick={() => signIn("github")} className={Style.SignInButton}>
       <FaGithub color="#EBA417" />
       Sign In with Github
     </button>
