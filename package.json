@@ -8,6 +8,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "chalk": "^5.0.0",
+    "faunadb": "^4.5.2",
     "next": "12.0.7",
     "next-auth": "^4.0.6",
     "react": "17.0.2",
